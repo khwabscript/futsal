@@ -16,9 +16,9 @@ def write_amfr_fixture_data(matchHash: str):
 	if not os.path.isdir(path):
 		os.makedirs(path)
 
-	eventFile = path + '/events.json'
-	homeTeamFile = path + '/homeTeam.json'
-	awayTeamFile = path + '/awayTeam.json'
+	eventFile = path + '_events.json'
+	homeTeamFile = path + '_homeTeam.json'
+	awayTeamFile = path + '_awayTeam.json'
 
 	if not os.path.isfile(eventFile):
 		events = parse_amfr_player_events('http://amfr.ru/match/' + matchHash + '/', headers)

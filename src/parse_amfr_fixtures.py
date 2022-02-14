@@ -1,3 +1,4 @@
+import os
 import requests
 from bs4 import BeautifulSoup as BS
 from writeJson import writeJson
@@ -45,8 +46,12 @@ def parse_amfr_fixtures_page(url, headers):
 
 def parse_amfr_fixtures():
 	fixtures = []
+	directory = 'superliga'
 	for i in range(8, 0, -1):
 		fixtures = fixtures + parse_amfr_fixtures_page('http://amfr.ru/league/super/calendar/?TOUR=ALL&PAGEN_3=' + str(i), headers)
+	if not os.path.exists(directory):
+		os.makedirs(directory)
+		print('The directory ' + directory + ' is created!')
 	writeJson(fixtures, 'superliga/fixtures.json')
 
 parse_amfr_fixtures()
