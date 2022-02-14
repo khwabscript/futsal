@@ -4,7 +4,7 @@ Futsal parser is a Python scripts for getting data from [AMFR](https://amfr.ru) 
 
 ## Installation
 
-Use the Git to download futsal code.
+Use the Git to download futsal code
 
 ```bash
 git clone https://github.com/khwabscript/futsal-parser
@@ -19,17 +19,17 @@ pip install -r requirements.txt
 ## Usage
 Get AMFR data
 
-(If you do it first time during the season, it can take a long time - monitor the progress in superliga folder)
+(If you do it first time during the season, it can take a long time - monitor the progress in superliga/fixtures folder)
 
 
 ```python
-python src/get-amfr-player-events.py
+python get-amfr-player-events.py
 ```
 
 Get LNFS data
 
 ```python
-python src/get-lnfs-player-evetns.py
+python get-lnfs-player-evetns.py
 ```
 
 ## Contributing
