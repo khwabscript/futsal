@@ -13,8 +13,6 @@ headers = {
 
 def write_amfr_fixture_data(matchHash: str):
 	path = 'superliga/fixtures/' + matchHash
-	if not os.path.isdir(path):
-		os.makedirs(path)
 
 	eventFile = path + '_events.json'
 	homeTeamFile = path + '_homeTeam.json'

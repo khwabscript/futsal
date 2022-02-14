@@ -1,6 +1,6 @@
 # Futsal parser
 
-Futsal parser is a Python scripts for getting data from AMFR and LNFS leagues to count fantasy points.
+Futsal parser is a Python scripts for getting data from [AMFR](https://amfr.ru) and [LNFS](http://www.lnfs.es) leagues to count fantasy points.
 
 ## Installation
 
@@ -18,7 +18,9 @@ pip install -r requirements.txt
 
 ## Usage
 Get AMFR data
-python get-amfr-player-events.py
+
+(If you do it first time during the season, it can take a long time - monitor the progress in superliga folder)
+
 
 ```python
 python src/get-amfr-player-events.py
