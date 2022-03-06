@@ -30,7 +30,11 @@ def parse_amfr_player_events(url, headers):
 				for tr in trs:
 					playerEvent = {}
 					tds = tr.find_all('td')
-					playerEvent['number'] = int(tds[0].text)
+					try:
+						playerEvent['number'] = int(tds[0].text)
+					except Exception as e:
+						playerEvent['number'] = 0
+						print('undefined number: player ' + tds[1].text.strip() + ' fixture ' + url)
 					playerEvent['player_name'] = tds[1].text.strip()
 					minuteColumn = 3 if eventType in ['goal', 'penalty_missed'] else 2
 					try:
