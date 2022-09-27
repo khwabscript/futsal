@@ -9,6 +9,9 @@ with open('superliga/fixtures.json') as json_file:
 
 for fixture in fixtures:
 	path = 'superliga/fixtures/' + str(fixture['id'])
+	if fixture['id'] < 884169:
+		continue
+	# print(fixture)
 	if os.path.isdir(path):
 		continue
 	if 'home_team_goals' not in fixture:

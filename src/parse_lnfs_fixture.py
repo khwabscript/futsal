@@ -43,7 +43,10 @@ def parse_lnfs_fixture(url, headers):
 					player['id'] = int(link['href'].split('/')[-1:][0])
 					player['teamIndex'] = teamIndex
 					player['goals_conceded'] = int(score[teamIndex])
-					player['number'] = int(data.find('div', class_='r-dorsal').text)
+					try:
+						player['number'] = int(data.find('div', class_='r-dorsal').text)
+					except Exception as e:
+						player['number'] = 0
 					player['name'] = data.find('div', class_='name').find('p').text
 					player['pos'] = data.find('div', class_='name').find('div').text
 					actions = data.find('div', class_='actions').find_all('div')

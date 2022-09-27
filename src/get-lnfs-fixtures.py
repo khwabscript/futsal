@@ -12,7 +12,7 @@ headers = {
 }
 
 fixtures = parse_lnfs_fixtures('http://www.lnfs.es/competicion/primera/2022/calendario/1', headers)
-directory = 'lnfs'
+directory = 'lnfs/fixtures'
 if not os.path.exists(directory):
 	os.makedirs(directory)
 	print('The directory ' + directory + ' is created!')
