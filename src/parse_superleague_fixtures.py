@@ -11,6 +11,7 @@ headers = {
     )
 }
 
+
 def parse_superleague_fixtures(url, headers):
     fixtures = []
     session = requests.Session()
@@ -32,15 +33,24 @@ def parse_superleague_fixtures(url, headers):
             fixture["id"] = int(result["href"].replace("/match/", ""))
 
             datetime = tour_fixture.find("span", {"class": "schedule__time"}).text.strip().split("/")
-            fixture["datetime"] = (
-                datetime[0].strip().replace(".", "").replace(" ", ".")
-                .replace("СЕНТ", "09")
-                .replace("ОКТ", "10")
-                .replace("НОЯБ", "11")
-                .replace("ДЕК", "12")
-                + ".2022, "
-                + datetime[2].strip()
-            )
+            try:
+                fixture["datetime"] = (
+                    datetime[0].strip().replace(".", "").replace(" ", ".")
+                    .replace("СЕНТ", "09")
+                    .replace("ОКТ", "10")
+                    .replace("НОЯБ", "11")
+                    .replace("ДЕК", "12")
+                    .replace("ЯНВ", "01")
+                    .replace("ФЕВР", "02")
+                    .replace("МАР", "03")
+                    .replace("АПР", "04")
+                    + (", " if datetime[0].__contains__("2023") else ".2024, ")
+                    + datetime[len(datetime) - 1].strip()
+                )
+            except Exception as e:
+                print("Problem with datetime")
+                print(datetime)
+                return
 
             home_team = tour_fixture.find("a", {"class": "schedule__team-1"})
             fixture["home_team"]["id"] = int(home_team["href"].split("=")[1])
@@ -52,6 +62,8 @@ def parse_superleague_fixtures(url, headers):
 
             try:
                 score = result.text.strip()
+                # for penalty shootout
+                score = score.split("(")[0]
                 fixture["home_team_goals"] = int(score.split(":")[0].strip())
                 fixture["away_team_goals"] = int(score.split(":")[1].strip())
             except Exception as e:
@@ -63,6 +75,7 @@ def parse_superleague_fixtures(url, headers):
 
     return fixtures
 
+
 def store_fixtures(fixtures):
     directory = "superleague/fixtures"
 
@@ -71,5 +84,6 @@ def store_fixtures(fixtures):
         print("The directory " + directory + " is created!")
     writeJson(fixtures, "superleague/fixtures.json")
 
-# r = parse_superleague_fixtures('https://superliga.rfs.ru/tournament/1025599/calendar?round_id=1044861&type=tours', headers)
+
+# r = parse_superleague_fixtures('https://superliga.rfs.ru/tournament/1032038/calendar?round_id=1058048&type=tours', headers)
 # print(r)
